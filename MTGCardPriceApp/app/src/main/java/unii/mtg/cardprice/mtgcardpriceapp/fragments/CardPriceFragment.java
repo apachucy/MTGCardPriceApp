@@ -72,7 +72,7 @@ public class CardPriceFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_price, container, false);
         ButterKnife.bind(this, view);
-        if (!(mCardPrice == null || mCardPrice.getCardName().isEmpty())) {
+        if (mCardPrice != null && mCardPrice.getCardName() != null && mCardPrice.getCardName().isEmpty()) {
             mPriceHighTextView.setText(getString(R.string.single_card_price_high, mCardPrice.getHighPrice(), mCardPrice.getCurrency()));
             mPriceMediumTextView.setText(getString(R.string.single_card_price_medium, mCardPrice.getMediumPrice(), mCardPrice.getCurrency()));
             mPriceLowTextView.setText(getString(R.string.single_card_price_low, mCardPrice.getLowPrice(), mCardPrice.getCurrency()));

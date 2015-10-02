@@ -1,5 +1,6 @@
 package unii.mtg.cardprice.mtgcardpriceapp;
 
+import android.app.Application;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,6 @@ public class CardPriceActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList {
 
 
-    private ArrayList<Card> mDraftCardList = new ArrayList<>();
     private ArrayList<Card> mCardList = new ArrayList<>();
     private Card mSearchedCard = new Card();
     /**
@@ -136,7 +136,7 @@ public class CardPriceActivity extends AppCompatActivity
 
     @Override
     public ArrayList<Card> getDraftCardList() {
-        return mDraftCardList;
+        return ((ICardPriceDraftList) getApplicationContext()).getDraftCardList();
     }
 
     @Override
