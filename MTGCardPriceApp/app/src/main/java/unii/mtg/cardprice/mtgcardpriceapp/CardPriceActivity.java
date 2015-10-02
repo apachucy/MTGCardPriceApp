@@ -1,26 +1,40 @@
 package unii.mtg.cardprice.mtgcardpriceapp;
 
-import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import unii.mtg.cardprice.mtgcardpriceapp.config.FragmentConfig;
+import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceListFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardList;
+import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.NavigationDrawerFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
 
 public class CardPriceActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList {
 
+
+    private ArrayList<Card> mDraftCardList = new ArrayList<>();
+    private ArrayList<Card> mCardList = new ArrayList<>();
+    private Card mSearchedCard = new Card();
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
@@ -32,7 +46,7 @@ public class CardPriceActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_price);
-
+        // ButterKnife.bind(this);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -41,105 +55,94 @@ public class CardPriceActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        handleIntent(getIntent());
+
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = null;
+        switch (position) {
+            case FragmentConfig.ID_CARD_PRICE_FRAGMENT:
+                fragment = new CardPriceFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.CARD_BUNDLE, mSearchedCard);
+                fragment.setArguments(bundle);
+                break;
+            case FragmentConfig.ID_CARD_PRICE_DRAFT_LIST_FRAGMENT:
+                fragment = new CardPriceListFragment();
+                break;
+            default:
+                fragment = new CardPriceListFragment();
+                break;
+        }
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
-    }
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        //drawer is close - show CARD PRICE MENU
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.card_price, menu);
             restoreActionBar();
+            // Associate searchable configuration with the SearchView
+            MenuItem searchItem = menu.findItem(R.id.action_search);
+            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            SearchView searchView = null;
+            if (searchItem != null) {
+                searchView = (SearchView) searchItem.getActionView();
+            }
+            if (searchView != null) {
+                searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            }
             return true;
         }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_card_price, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((CardPriceActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            //TODO: Make a request for a card !!
+            Toast.makeText(CardPriceActivity.this, query, Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public ArrayList<Card> getDraftCardList() {
+        return mDraftCardList;
+    }
+
+    @Override
+    public ArrayList<Card> getCardList() {
+        return mCardList;
+    }
+
 
 }

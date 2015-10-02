@@ -1,14 +1,25 @@
 <resources>
     <string name="app_name">MTGCardPriceApp</string>
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
+    <!-- TODO: REMOVE IT -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_example">Example action</string>
-
-    <string name="action_settings">Settings</string>
+    <!--END TODO -->
+    <!-- Card List -->
+    <string name="adapter_card_name">Card name %1$s</string>
+    <string name="adapter_card_price">Price: %1$s %2$f</string>
+    <string name="adapter_card_foil">Is card foil: %1$s %2$f</string>
+    <!-- END Card List-->
+    <!-- MENU -->
+    <string name="action_search">Search</string>
+    <string name="search_hint">Card Name</string>
+    <!-- END MENU -->
+    <!-- Single Card View -->
+    <string name="single_card_price">Price:</string>
+    <string name="single_card_price_high">High : %1$f %2$s</string>
+    <string name="single_card_price_medium">Medium : %1$f %2$s</string>
+    <string name="single_card_price_low">Low : %1$f %2$s</string>
+    <string name="single_card_price_foil">Foil : %1$f %2$s</string>
+    <string name="single_card_add_draft_list">Add to draft list</string>
+    <string name="single_card_add_card_list">Add to card list</string>
+    <!-- End single card view -->
 </resources>
