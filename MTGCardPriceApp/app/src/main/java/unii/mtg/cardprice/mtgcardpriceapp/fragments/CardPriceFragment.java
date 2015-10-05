@@ -7,10 +7,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
 import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
@@ -33,6 +35,18 @@ public class CardPriceFragment extends BaseFragment {
     @Bind(R.id.singleCard_priceFoilTextView)
     TextView mPriceFoilTextView;
 
+    @Bind(R.id.singleCard_isFoilCheckBox)
+    CheckBox mIsFoilCheckBox;
+
+    @OnCheckedChanged(R.id.singleCard_isFoilCheckBox)
+    void onFoilChecked(boolean checked) {
+        mCardPrice.setIsFoil(checked);
+    }
+
+    @OnClick(R.id.singleCard_addCardToListButton)
+    void onAddButtonClicked(View view) {
+    }
+
     @OnClick(R.id.singleCard_addDraftList)
     void onAddItemDraftList(View view) {
         mCardPriceDraftList.getDraftCardList().add(mCardPrice);
@@ -48,6 +62,8 @@ public class CardPriceFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         mCardPrice = (Card) bundle.getSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.CARD_BUNDLE);
+        mIsFoilCheckBox.setChecked(mCardPrice.isFoil());
+        //TODO: add spinner
     }
 
     @Override

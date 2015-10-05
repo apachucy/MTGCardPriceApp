@@ -31,6 +31,8 @@ public class CardPriceActivity extends AppCompatActivity
 
     private ArrayList<Card> mCardList = new ArrayList<>();
     private Card mSearchedCard = new Card();
+    private ArrayList<Card> mDraftCardList = new ArrayList<>();;
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -136,7 +138,7 @@ public class CardPriceActivity extends AppCompatActivity
 
     @Override
     public ArrayList<Card> getDraftCardList() {
-        return ((ICardPriceDraftList) getApplicationContext()).getDraftCardList();
+        return mDraftCardList;
     }
 
     @Override

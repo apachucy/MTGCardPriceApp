@@ -12,7 +12,7 @@ public class Card implements Serializable{
     private float mHighPrice;
     private float mLowPrice;
     private float mFoilPrice;
-
+    private boolean isFoil;
     public Card() {
     }
 
@@ -63,5 +63,13 @@ public class Card implements Serializable{
 
     public void setFoilPrice(float mFoilPrice) {
         this.mFoilPrice = mFoilPrice;
+    }
+
+    public boolean isFoil() {
+        return isFoil;
+    }
+
+    public void setIsFoil(boolean isFoil) {
+        this.isFoil = isFoil;
     }
 }

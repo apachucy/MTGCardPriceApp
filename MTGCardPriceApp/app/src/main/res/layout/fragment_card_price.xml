@@ -53,23 +53,36 @@
             android:text="New Text" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/singleCard_priceFoilTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/singleCard_foilHolder"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/singleCard_priceHolder"
-        android:text="New Text" />
+        android:layout_below="@+id/singleCard_priceHolder">
+
+        <TextView
+            android:id="@+id/singleCard_priceFoilTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="New Text" />
+
+        <CheckBox
+            android:id="@+id/singleCard_isFoilCheckBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/single_card_is_foil" />
+
+    </LinearLayout>
+
 
     <LinearLayout
+        android:id="@+id/singleCard_predefinedListHolder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/singleCard_priceFoilTextView"
+        android:layout_below="@+id/singleCard_foilHolder"
         android:orientation="horizontal">
 
         <TextView
@@ -91,4 +104,23 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/singleCard_predefinedListHolder"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/singleCard_customListSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7" />
+
+        <Button
+            android:id="@+id/singleCard_addCardToListButton"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.3"
+            android:text="@string/single_card_add_button" />
+    </LinearLayout>
 </RelativeLayout>
