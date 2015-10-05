@@ -24,4 +24,11 @@
     <string name="single_card_add_card_list">Add to card list</string>
     <string name="single_card_add_button">Add </string>
     <!-- End single card view -->
+    <!--Settings -->
+    <string name="settings_tutorial">Tutorial</string>
+    <string name="settings_add_list">Add new list:</string>
+    <string name="settings_add">Add</string>
+    <string name="settings_accept">Ok</string>
+    <string name="settings_page_price">Choose price from:</string>
+    <!-- End Settings-->
 </resources>
