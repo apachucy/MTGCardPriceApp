@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +24,7 @@ import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.NavigationDrawerFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
 
-public class CardPriceActivity extends AppCompatActivity
+public class CardPriceActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList {
 
 
