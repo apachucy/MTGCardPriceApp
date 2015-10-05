@@ -1,6 +1,5 @@
 package unii.mtg.cardprice.mtgcardpriceapp;
 
-import android.app.Application;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -17,12 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import unii.mtg.cardprice.mtgcardpriceapp.config.FragmentConfig;
+import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceListFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.NavigationDrawerFragment;
-import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
 
 public class CardPriceActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList {
@@ -30,7 +29,8 @@ public class CardPriceActivity extends BaseActivity
 
     private ArrayList<Card> mCardList = new ArrayList<>();
     private Card mSearchedCard = new Card();
-    private ArrayList<Card> mDraftCardList = new ArrayList<>();;
+    private ArrayList<Card> mDraftCardList = new ArrayList<>();
+
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -48,6 +48,7 @@ public class CardPriceActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_price);
         // ButterKnife.bind(this);
+        openHelper(this);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();

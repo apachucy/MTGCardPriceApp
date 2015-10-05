@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
-import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
+import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 
 /**
  * Card price adapter - displaying card in list

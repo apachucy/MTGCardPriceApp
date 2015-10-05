@@ -13,11 +13,12 @@ import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.database.CardGroup;
 import unii.mtg.cardprice.mtgcardpriceapp.database.CardRelationTable;
 import unii.mtg.cardprice.mtgcardpriceapp.database.DatabaseHelper;
+import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
 
 /**
  * Created by apachucy on 2015-10-05.
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements IDatabaseConnector {
 
     // Reference of DatabaseHelper class to access its DAOs and other components
     protected DatabaseHelper mDatabaseHelper = null;
@@ -36,7 +37,7 @@ public class BaseActivity extends AppCompatActivity {
         //return mDatabaseHelper;
     }
 
-    protected ArrayList<Card> getGroupCardList(int listGroupId) {
+    public ArrayList<Card> getGroupCardList(int listGroupId) {
         if (mDatabaseHelper == null) {
             return null;
         } else {
@@ -54,7 +55,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected List<CardGroup> getGroupListName() {
+    public List<CardGroup> getGroupListName() {
         if (mDatabaseHelper == null) {
             return null;
         } else {
@@ -68,7 +69,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void removeCardFromList(int cardId, int listGroupId) {
+    public void removeCardFromList(int cardId, int listGroupId) {
         if (mDatabaseHelper != null) {
             try {
                 List<CardRelationTable> cardToBeRemovedList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(Card.CARD_ID, cardId).query();
@@ -83,13 +84,42 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected void removeCardGroup(int listGroupId) {
+    public void removeCardGroup(int listGroupId) {
         if (mDatabaseHelper != null) {
             try {
                 CardGroup cardGroup = mDatabaseHelper.getCardListDao().queryBuilder().where().eq(CardGroup.LIST_ID, listGroupId).queryForFirst();
                 mDatabaseHelper.getCardListDao().delete(cardGroup);
                 List<CardRelationTable> cardRelationTableList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(CardRelationTable.LIST_ID, cardGroup.getCardListId()).query();
                 mDatabaseHelper.getCardRelationTableDao().delete(cardRelationTableList);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void addList(CardGroup newCardGroup) {
+        if (mDatabaseHelper != null) {
+            try {
+                mDatabaseHelper.getCardListDao().create(newCardGroup);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void addCard(Card newCard, int listId) {
+        if (mDatabaseHelper != null) {
+            try {
+                mDatabaseHelper.getCardDao().create(newCard);
+
+                //TODO sprawdzić czy wygeneruje poprawnie id dla nowej karty
+                CardRelationTable cardRelationTable = new CardRelationTable();
+                cardRelationTable.setCardId(newCard.getCardId());
+                cardRelationTable.setCardListId(listId);
+                mDatabaseHelper.getCardRelationTableDao().create(cardRelationTable);
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }

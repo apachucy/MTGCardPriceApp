@@ -4,10 +4,6 @@ package unii.mtg.cardprice.mtgcardpriceapp.sharedpreferences;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
-import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
 
 public class SettingsSharedPreferences implements ISettings {
     private SharedPreferences mSharedPreferences;
@@ -31,16 +27,5 @@ public class SettingsSharedPreferences implements ISettings {
 
     }
 
-    @Override
-    public void setCardList(ArrayList<Card> cardList) {
-     //TODO
-
-    }
-
-    @Override
-    public ArrayList<Card> getCardList() {
-        //TODO
-        return null;
-    }
 
 }

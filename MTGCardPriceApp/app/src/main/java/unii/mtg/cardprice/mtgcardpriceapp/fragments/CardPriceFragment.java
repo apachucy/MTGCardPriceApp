@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -15,17 +16,22 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
-import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
+import unii.mtg.cardprice.mtgcardpriceapp.adapters.GroupListAdapter;
+import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
+import unii.mtg.cardprice.mtgcardpriceapp.database.CardGroup;
+import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
 
 
 public class CardPriceFragment extends BaseFragment {
 
     private Context mContext;
-
+    private IDatabaseConnector mDatabaseConnector;
     private ICardPriceDraftList mCardPriceDraftList;
-    private ICardList mCardList;
+    private ICardList mCardList; //TODO: czy to jest potrzebne?
 
     private Card mCardPrice;
+    private GroupListAdapter mGroupListAdapter;
+
     @Bind(R.id.singleCard_priceHighTextView)
     TextView mPriceHighTextView;
     @Bind(R.id.singleCard_priceMediumTextView)
@@ -54,8 +60,12 @@ public class CardPriceFragment extends BaseFragment {
 
     @OnClick(R.id.singleCard_addCardList)
     void onAddItemCardList(View view) {
-        mCardList.getCardList().add(mCardPrice);
+        //mCardList.getCardList().add(mCardPrice);
+        mDatabaseConnector.addCard(mCardPrice, ((CardGroup) (mCustomListSpinner.getSelectedItem())).getCardListId());
     }
+
+    @Bind(R.id.singleCard_customListSpinner)
+    Spinner mCustomListSpinner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +91,7 @@ public class CardPriceFragment extends BaseFragment {
             throw new ClassCastException("Activity must implement ICardList");
         }
         mContext = activity;
+        mDatabaseConnector = (IDatabaseConnector) activity;
     }
 
     @Nullable

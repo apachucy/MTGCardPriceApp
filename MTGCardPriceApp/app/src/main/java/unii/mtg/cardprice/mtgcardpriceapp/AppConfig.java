@@ -2,11 +2,6 @@ package unii.mtg.cardprice.mtgcardpriceapp;
 
 import android.app.Application;
 
-import java.util.ArrayList;
-
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
-import unii.mtg.cardprice.mtgcardpriceapp.pojo.Card;
-
 
 /**
  * Created by Arkadiusz Pachucy on 2015-05-04.
