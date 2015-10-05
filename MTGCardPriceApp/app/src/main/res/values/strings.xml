@@ -6,7 +6,8 @@
     <!-- Card List -->
     <string name="adapter_card_name">Card name %1$s</string>
     <string name="adapter_card_price">Price: %1$s %2$f</string>
-    <string name="adapter_card_foil">Is card foil: %1$s %2$f</string>
+    <string name="adapter_card_foil">Foil price: %1$s %2$f</string>
+    <string name="adapter_card_isFoil">Is card foil: %1$s</string>
     <!-- END Card List-->
     <!-- MENU -->
     <string name="action_search">Search</string>

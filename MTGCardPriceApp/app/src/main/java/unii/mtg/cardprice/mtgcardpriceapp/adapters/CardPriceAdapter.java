@@ -38,8 +38,14 @@ public class CardPriceAdapter extends RecyclerView.Adapter<CardPriceAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         viewHolder.cardNameTextView.setText(mContext.getString(R.string.adapter_card_name, mCardList.get(i).getCardName()));
-        viewHolder.cardMediumPriceTextView.setText(mContext.getString(R.string.adapter_card_price, mCardList.get(i).getCurrency(), mCardList.get(i).getMediumPrice()));
-        viewHolder.cardIsFoilTextView.setText(mContext.getString(R.string.adapter_card_foil, mCardList.get(i).getCurrency(), mCardList.get(i).getFoilPrice()));
+        String cardText = "";
+        if (mCardList.get(i).isFoil()) {
+            cardText = mContext.getString(R.string.adapter_card_foil, mCardList.get(i).getCurrency(), mCardList.get(i).getMediumPrice());
+        } else {
+            cardText = mContext.getString(R.string.adapter_card_price, mCardList.get(i).getCurrency(), mCardList.get(i).getMediumPrice());
+        }
+        viewHolder.cardMediumPriceTextView.setText(cardText);
+        viewHolder.cardIsFoilTextView.setText(mContext.getString(R.string.adapter_card_isFoil, mCardList.get(i).isFoil() + ""));
     }
 
     @Override
