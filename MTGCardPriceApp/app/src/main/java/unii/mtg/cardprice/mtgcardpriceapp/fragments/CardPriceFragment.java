@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,7 +33,10 @@ public class CardPriceFragment extends BaseFragment {
     private ICardList mCardList; //TODO: czy to jest potrzebne?
 
     private Card mCardPrice;
+
     private GroupListAdapter mGroupListAdapter;
+
+    private ArrayList<CardGroup> mCardGroupList;
 
     @Bind(R.id.singleCard_priceHighTextView)
     TextView mPriceHighTextView;
@@ -51,6 +57,7 @@ public class CardPriceFragment extends BaseFragment {
 
     @OnClick(R.id.singleCard_addCardToListButton)
     void onAddButtonClicked(View view) {
+        mDatabaseConnector.addCard(mCardPrice, ((CardGroup) (mCustomListSpinner.getSelectedItem())).getCardListId());
     }
 
     @OnClick(R.id.singleCard_addDraftList)
@@ -60,8 +67,7 @@ public class CardPriceFragment extends BaseFragment {
 
     @OnClick(R.id.singleCard_addCardList)
     void onAddItemCardList(View view) {
-        //mCardList.getCardList().add(mCardPrice);
-        mDatabaseConnector.addCard(mCardPrice, ((CardGroup) (mCustomListSpinner.getSelectedItem())).getCardListId());
+        //TODO: stworzyć predefiniowaną listę i do niej dodać kartę
     }
 
     @Bind(R.id.singleCard_customListSpinner)
@@ -73,7 +79,11 @@ public class CardPriceFragment extends BaseFragment {
         Bundle bundle = getArguments();
         mCardPrice = (Card) bundle.getSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.CARD_BUNDLE);
         mIsFoilCheckBox.setChecked(mCardPrice.isFoil());
-        //TODO: add spinner
+
+        mCardGroupList = new ArrayList(mDatabaseConnector.getGroupListName());
+        mGroupListAdapter = new GroupListAdapter(mCardGroupList);
+        mCustomListSpinner.setAdapter(mGroupListAdapter);
+
     }
 
     @Override
