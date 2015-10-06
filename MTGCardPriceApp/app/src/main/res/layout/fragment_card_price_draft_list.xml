@@ -4,9 +4,34 @@
     android:layout_height="match_parent"
     tools:context=".CardPriceActivity$PlaceholderFragment">
 
+
+    <LinearLayout
+        android:id="@+id/cardPriceFragment_sortHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cardPriceFragment_sortAscendingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:drawableLeft="@drawable/ic_sort_ascending"
+            android:text="@string/draft_sort_asc" />
+
+        <TextView
+            android:id="@+id/cardPriceFragment_sortDescendingTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:drawableLeft="@drawable/ic_sort_descending"
+            android:text="@string/draft_sort_desc" />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardPriceFragment_cardListRecyclerView"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardPriceFragment_sortHolder"
         android:scrollbars="vertical" />
 </RelativeLayout>

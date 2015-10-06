@@ -41,7 +41,7 @@ public class CardPriceAdapter extends RecyclerView.Adapter<CardPriceAdapter.View
         viewHolder.cardNameTextView.setText(mContext.getString(R.string.adapter_card_name, mCardList.get(i).getCardName()));
         String cardText = "";
         if (mCardList.get(i).isFoil()) {
-            cardText = mContext.getString(R.string.adapter_card_foil, mCardList.get(i).getCurrency(), StringHelper.floatFormatter(mCardList.get(i).getMediumPrice()));
+            cardText = mContext.getString(R.string.adapter_card_foil, mCardList.get(i).getCurrency(), StringHelper.floatFormatter(mCardList.get(i).getFoilPrice()));
         } else {
             cardText = mContext.getString(R.string.adapter_card_price, mCardList.get(i).getCurrency(), StringHelper.floatFormatter(mCardList.get(i).getMediumPrice()));
         }

@@ -19,6 +19,7 @@ import unii.mtg.cardprice.mtgcardpriceapp.config.FragmentConfig;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceListFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardDraftListFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.IMenu;
@@ -78,7 +79,7 @@ public class CardPriceActivity extends BaseActivity
                 fragment.setArguments(bundle);
                 break;
             case FragmentConfig.ID_CARD_PRICE_DRAFT_LIST_FRAGMENT:
-                fragment = new CardPriceListFragment();
+                fragment = new CardDraftListFragment();
                 break;
 
             case FragmentConfig.ID_SETTINGS_FRAGMENT:

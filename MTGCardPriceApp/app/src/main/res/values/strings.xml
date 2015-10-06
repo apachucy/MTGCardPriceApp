@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- Card List -->
+    <!-- Card Adapter List -->
     <string name="adapter_card_name">Card name %1$s</string>
     <string name="adapter_card_price">Price: %1$s %2$s</string>
     <string name="adapter_card_foil">Foil price: %1$s %2$s</string>
@@ -34,4 +34,8 @@
     <string name="settings_list_name_empty">This name for list cannot be used</string>
     <string name="settings_list_added">List was added</string>
     <!-- End Settings-->
+    <!-- Card Draft -->
+    <string name="draft_sort_asc">Price ascending</string>
+    <string name="draft_sort_desc">Price descending</string>
+    <!-- END Card Draft -->
 </resources>
