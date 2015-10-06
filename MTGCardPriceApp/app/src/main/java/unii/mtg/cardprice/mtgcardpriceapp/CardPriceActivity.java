@@ -22,6 +22,7 @@ import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceListFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.NavigationDrawerFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.fragments.SettingsFragment;
 
 public class CardPriceActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList {
@@ -75,6 +76,10 @@ public class CardPriceActivity extends BaseActivity
                 break;
             case FragmentConfig.ID_CARD_PRICE_DRAFT_LIST_FRAGMENT:
                 fragment = new CardPriceListFragment();
+                break;
+
+            case FragmentConfig.ID_SETTINGS_FRAGMENT:
+                fragment = new SettingsFragment();
                 break;
             default:
                 fragment = new CardPriceListFragment();

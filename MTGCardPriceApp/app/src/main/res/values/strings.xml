@@ -30,5 +30,7 @@
     <string name="settings_add">Add</string>
     <string name="settings_accept">Ok</string>
     <string name="settings_page_price">Choose price from:</string>
+    <string name="settings_list_name_empty">This name for list cannot be used</string>
+    <string name="settings_list_added">List was added</string>
     <!-- End Settings-->
 </resources>

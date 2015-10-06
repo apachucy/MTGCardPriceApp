@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,6 @@ public class CardPriceFragment extends BaseFragment {
     private IDatabaseConnector mDatabaseConnector;
     private ICardPriceDraftList mCardPriceDraftList;
     private ICardList mCardList; //TODO: czy to jest potrzebne?
-
     private Card mCardPrice;
 
     private GroupListAdapter mGroupListAdapter;
@@ -78,11 +76,7 @@ public class CardPriceFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         mCardPrice = (Card) bundle.getSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.CARD_BUNDLE);
-        mIsFoilCheckBox.setChecked(mCardPrice.isFoil());
 
-        mCardGroupList = new ArrayList(mDatabaseConnector.getGroupListName());
-        mGroupListAdapter = new GroupListAdapter(mCardGroupList);
-        mCustomListSpinner.setAdapter(mGroupListAdapter);
 
     }
 
@@ -100,8 +94,14 @@ public class CardPriceFragment extends BaseFragment {
         } else {
             throw new ClassCastException("Activity must implement ICardList");
         }
+
         mContext = activity;
-        mDatabaseConnector = (IDatabaseConnector) activity;
+        if (activity instanceof IDatabaseConnector) {
+            mDatabaseConnector = (IDatabaseConnector) activity;
+        } else {
+            throw new ClassCastException("Activity must implement IDatabaseConnector");
+        }
+
     }
 
     @Nullable
@@ -114,7 +114,14 @@ public class CardPriceFragment extends BaseFragment {
             mPriceMediumTextView.setText(getString(R.string.single_card_price_medium, mCardPrice.getMediumPrice(), mCardPrice.getCurrency()));
             mPriceLowTextView.setText(getString(R.string.single_card_price_low, mCardPrice.getLowPrice(), mCardPrice.getCurrency()));
             mPriceFoilTextView.setText(getString(R.string.single_card_price_foil, mCardPrice.getFoilPrice(), mCardPrice.getCurrency()));
+            mIsFoilCheckBox.setChecked(mCardPrice.isFoil());
+
+
         }
+
+        mCardGroupList = new ArrayList(mDatabaseConnector.getGroupListName());
+        mGroupListAdapter = new GroupListAdapter(mCardGroupList);
+        mCustomListSpinner.setAdapter(mGroupListAdapter);
         return view;
     }
 

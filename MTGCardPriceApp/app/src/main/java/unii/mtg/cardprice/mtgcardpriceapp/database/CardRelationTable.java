@@ -12,9 +12,11 @@ public class CardRelationTable implements Serializable {
     public static final String CARD_ID = "card_id";
     public static final String LIST_ID = "list_id";
 
-    @DatabaseField(foreign = true, columnName = CARD_ID)
+    @DatabaseField(generatedId = true)
+    private int mIdCardRelationTable;
+    @DatabaseField(columnName = CARD_ID)
     private int mCardId;
-    @DatabaseField(foreign = true, columnName = LIST_ID)
+    @DatabaseField(columnName = LIST_ID)
     private int mCardListId;
 
     public CardRelationTable() {
