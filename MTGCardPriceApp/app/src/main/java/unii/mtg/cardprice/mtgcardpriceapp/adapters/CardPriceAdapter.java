@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
+import unii.mtg.cardprice.mtgcardpriceapp.config.StringHelper;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 
 /**
@@ -40,9 +41,9 @@ public class CardPriceAdapter extends RecyclerView.Adapter<CardPriceAdapter.View
         viewHolder.cardNameTextView.setText(mContext.getString(R.string.adapter_card_name, mCardList.get(i).getCardName()));
         String cardText = "";
         if (mCardList.get(i).isFoil()) {
-            cardText = mContext.getString(R.string.adapter_card_foil, mCardList.get(i).getCurrency(), mCardList.get(i).getMediumPrice());
+            cardText = mContext.getString(R.string.adapter_card_foil, mCardList.get(i).getCurrency(), StringHelper.floatFormatter(mCardList.get(i).getMediumPrice()));
         } else {
-            cardText = mContext.getString(R.string.adapter_card_price, mCardList.get(i).getCurrency(), mCardList.get(i).getMediumPrice());
+            cardText = mContext.getString(R.string.adapter_card_price, mCardList.get(i).getCurrency(), StringHelper.floatFormatter(mCardList.get(i).getMediumPrice()));
         }
         viewHolder.cardMediumPriceTextView.setText(cardText);
         viewHolder.cardIsFoilTextView.setText(mContext.getString(R.string.adapter_card_isFoil, mCardList.get(i).isFoil() + ""));

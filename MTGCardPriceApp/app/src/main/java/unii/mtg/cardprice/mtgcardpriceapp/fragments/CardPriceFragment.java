@@ -19,6 +19,7 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
 import unii.mtg.cardprice.mtgcardpriceapp.adapters.GroupListAdapter;
+import unii.mtg.cardprice.mtgcardpriceapp.config.StringHelper;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.database.CardGroup;
 import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
@@ -44,6 +45,8 @@ public class CardPriceFragment extends BaseFragment {
     TextView mPriceLowTextView;
     @Bind(R.id.singleCard_priceFoilTextView)
     TextView mPriceFoilTextView;
+    @Bind(R.id.singleCard_cardNameTextView)
+    TextView mCartNameTextView;
 
     @Bind(R.id.singleCard_isFoilCheckBox)
     CheckBox mIsFoilCheckBox;
@@ -109,14 +112,13 @@ public class CardPriceFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_price, container, false);
         ButterKnife.bind(this, view);
-        if (mCardPrice != null && mCardPrice.getCardName() != null && mCardPrice.getCardName().isEmpty()) {
-            mPriceHighTextView.setText(getString(R.string.single_card_price_high, mCardPrice.getHighPrice(), mCardPrice.getCurrency()));
-            mPriceMediumTextView.setText(getString(R.string.single_card_price_medium, mCardPrice.getMediumPrice(), mCardPrice.getCurrency()));
-            mPriceLowTextView.setText(getString(R.string.single_card_price_low, mCardPrice.getLowPrice(), mCardPrice.getCurrency()));
-            mPriceFoilTextView.setText(getString(R.string.single_card_price_foil, mCardPrice.getFoilPrice(), mCardPrice.getCurrency()));
+        if (mCardPrice != null && mCardPrice.getCardName() != null && !mCardPrice.getCardName().isEmpty()) {
+            mPriceHighTextView.setText(getString(R.string.single_card_price_high, StringHelper.floatFormatter(mCardPrice.getHighPrice()), mCardPrice.getCurrency()));
+            mPriceMediumTextView.setText(getString(R.string.single_card_price_medium, StringHelper.floatFormatter(mCardPrice.getMediumPrice()), mCardPrice.getCurrency()));
+            mPriceLowTextView.setText(getString(R.string.single_card_price_low, StringHelper.floatFormatter(mCardPrice.getLowPrice()), mCardPrice.getCurrency()));
+            mPriceFoilTextView.setText(getString(R.string.single_card_price_foil, StringHelper.floatFormatter(mCardPrice.getFoilPrice()), mCardPrice.getCurrency()));
             mIsFoilCheckBox.setChecked(mCardPrice.isFoil());
-
-
+            mCartNameTextView.setText(getString(R.string.single_card_name, mCardPrice.getCardName()));
         }
 
         mCardGroupList = new ArrayList(mDatabaseConnector.getGroupListName());

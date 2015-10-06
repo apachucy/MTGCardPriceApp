@@ -55,11 +55,13 @@ public class CardPriceActivity extends BaseActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
+
+        handleIntent(getIntent());
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        handleIntent(getIntent());
+
 
     }
 
@@ -137,6 +139,22 @@ public class CardPriceActivity extends BaseActivity
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+            mSearchedCard.setCardName("Null");
+            mSearchedCard.setLowPrice(0.05f);
+            mSearchedCard.setMediumPrice(0.1f);
+            mSearchedCard.setHighPrice(0.15f);
+            mSearchedCard.setFoilPrice(0.40f);
+            mSearchedCard.setCurrency("$");
+
+           /* FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment fragment = new CardPriceFragment();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.CARD_BUNDLE, mSearchedCard);
+            fragment.setArguments(bundle);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
+*/
             //TODO: Make a request for a card !!
             Toast.makeText(CardPriceActivity.this, query, Toast.LENGTH_SHORT).show();
         }

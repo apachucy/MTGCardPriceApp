@@ -73,8 +73,6 @@ public class SettingsFragment extends BaseFragment {
         } else {
             throw new ClassCastException("Activity must implement IMenu");
         }
-
-
         mContext = activity;
     }
 

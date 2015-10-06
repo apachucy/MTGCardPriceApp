@@ -5,8 +5,8 @@
 
     <!-- Card List -->
     <string name="adapter_card_name">Card name %1$s</string>
-    <string name="adapter_card_price">Price: %1$s %2$f</string>
-    <string name="adapter_card_foil">Foil price: %1$s %2$f</string>
+    <string name="adapter_card_price">Price: %1$s %2$s</string>
+    <string name="adapter_card_foil">Foil price: %1$s %2$s</string>
     <string name="adapter_card_isFoil">Is card foil: %1$s</string>
     <!-- END Card List-->
     <!-- MENU -->
@@ -15,14 +15,15 @@
     <!-- END MENU -->
     <!-- Single Card View -->
     <string name="single_card_price">Price:</string>
-    <string name="single_card_price_high">High : %1$f %2$s</string>
-    <string name="single_card_price_medium">Medium : %1$f %2$s</string>
-    <string name="single_card_price_low">Low : %1$f %2$s</string>
-    <string name="single_card_price_foil">Foil : %1$f %2$s</string>
+    <string name="single_card_price_high">High : %1$s %2$s</string>
+    <string name="single_card_price_medium">Medium : %1$s %2$s</string>
+    <string name="single_card_price_low">Low : %1$s %2$s</string>
+    <string name="single_card_price_foil">Foil : %1$s %2$s</string>
     <string name="single_card_is_foil">Is Foil</string>
     <string name="single_card_add_draft_list">Add to draft list</string>
     <string name="single_card_add_card_list">Add to card list</string>
     <string name="single_card_add_button">Add </string>
+    <string name="single_card_name">Card name: %1$s</string>
     <!-- End single card view -->
     <!--Settings -->
     <string name="settings_tutorial">Tutorial</string>
