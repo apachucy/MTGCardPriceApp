@@ -3,7 +3,6 @@ package unii.mtg.cardprice.mtgcardpriceapp.fragments;
 import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,16 +19,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import unii.mtg.cardprice.mtgcardpriceapp.R;
+import unii.mtg.cardprice.mtgcardpriceapp.database.CardGroup;
+import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends BaseFragment {
+public class NavigationDrawerFragment extends BaseFragment implements IMenu {
 
     /**
      * Remember the position of the selected item.
@@ -59,6 +63,10 @@ public class NavigationDrawerFragment extends BaseFragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+
+    private IDatabaseConnector mDatabaseConnector;
+    private ArrayList<String> mMenuItemList;
+    private ArrayAdapter<String> mMenuAdapter;
 
     public NavigationDrawerFragment() {
     }
@@ -99,11 +107,17 @@ public class NavigationDrawerFragment extends BaseFragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+
+        mMenuItemList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.dashboard_menu)));
+        for (CardGroup cardGroup : mDatabaseConnector.getGroupListName()) {
+            mMenuItemList.add(cardGroup.getCardListName());
+        }
+        mMenuAdapter = new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                getResources().getStringArray(R.array.dashboard_menu)));
+                android.R.id.text1, mMenuItemList
+        );
+        mDrawerListView.setAdapter(mMenuAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -208,6 +222,12 @@ public class NavigationDrawerFragment extends BaseFragment {
         } catch (ClassCastException e) {
             throw new ClassCastException("Activity must implement NavigationDrawerCallbacks.");
         }
+
+        try {
+            mDatabaseConnector = (IDatabaseConnector) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Activity must implement IDatabaseConnector.");
+        }
     }
 
     @Override
@@ -264,6 +284,12 @@ public class NavigationDrawerFragment extends BaseFragment {
 
     private ActionBar getActionBar() {
         return ((AppCompatActivity) getActivity()).getSupportActionBar();
+    }
+
+    @Override
+    public void addMenuItem(String itemName) {
+        mMenuItemList.add(itemName);
+        mMenuAdapter.notifyDataSetChanged();
     }
 
     /**

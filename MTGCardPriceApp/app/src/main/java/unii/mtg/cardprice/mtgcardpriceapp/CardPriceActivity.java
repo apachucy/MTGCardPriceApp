@@ -21,16 +21,16 @@ import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceListFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardList;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
+import unii.mtg.cardprice.mtgcardpriceapp.fragments.IMenu;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.NavigationDrawerFragment;
 import unii.mtg.cardprice.mtgcardpriceapp.fragments.SettingsFragment;
 
 public class CardPriceActivity extends BaseActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList, IMenu {
 
 
     private ArrayList<Card> mCardList = new ArrayList<>();
     private Card mSearchedCard = new Card();
-    private ArrayList<Card> mDraftCardList = new ArrayList<>();
 
 
     /**
@@ -46,10 +46,11 @@ public class CardPriceActivity extends BaseActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        openHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_price);
         // ButterKnife.bind(this);
-        openHelper(this);
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -143,7 +144,7 @@ public class CardPriceActivity extends BaseActivity
 
     @Override
     public ArrayList<Card> getDraftCardList() {
-        return mDraftCardList;
+        return ((ICardPriceDraftList) (getApplication())).getDraftCardList();
     }
 
     @Override
@@ -152,4 +153,8 @@ public class CardPriceActivity extends BaseActivity
     }
 
 
+    @Override
+    public void addMenuItem(String itemName) {
+        ((IMenu) (mNavigationDrawerFragment)).addMenuItem(itemName);
+    }
 }

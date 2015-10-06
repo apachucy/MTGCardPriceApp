@@ -27,6 +27,7 @@ public class SettingsFragment extends BaseFragment {
 
     private IDatabaseConnector mDatabaseConnector;
     private Context mContext;
+    private IMenu mMenuList;
 
     @OnCheckedChanged(R.id.settings_tutorialSwitch)
     void onTutorialSelected(boolean checked) {
@@ -47,6 +48,7 @@ public class SettingsFragment extends BaseFragment {
             mDatabaseConnector.addList(cardGroup);
             Toast.makeText(mContext, getString(R.string.settings_list_added), Toast.LENGTH_SHORT).show();
             mAddListEditText.setText("");
+            mMenuList.addMenuItem(groupName);
         } else {
             Toast.makeText(mContext, getString(R.string.settings_list_name_empty), Toast.LENGTH_SHORT).show();
         }
@@ -66,6 +68,13 @@ public class SettingsFragment extends BaseFragment {
         } else {
             throw new ClassCastException("Activity must implement IDatabaseConnector");
         }
+        if (activity instanceof IMenu) {
+            mMenuList = (IMenu) activity;
+        } else {
+            throw new ClassCastException("Activity must implement IMenu");
+        }
+
+
         mContext = activity;
     }
 

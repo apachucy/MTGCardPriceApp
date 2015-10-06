@@ -113,8 +113,6 @@ public class BaseActivity extends AppCompatActivity implements IDatabaseConnecto
         if (mDatabaseHelper != null) {
             try {
                 mDatabaseHelper.getCardDao().create(newCard);
-
-                //TODO sprawdzić czy wygeneruje poprawnie id dla nowej karty
                 CardRelationTable cardRelationTable = new CardRelationTable();
                 cardRelationTable.setCardId(newCard.getCardId());
                 cardRelationTable.setCardListId(listId);
