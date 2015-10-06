@@ -13,18 +13,23 @@
 
         <TextView
             android:id="@+id/cardPriceFragment_sortAscendingTextView"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:drawableLeft="@drawable/ic_sort_ascending"
+            android:gravity="center"
             android:text="@string/draft_sort_asc" />
 
         <TextView
             android:id="@+id/cardPriceFragment_sortDescendingTextView"
+            style="@style/textView"
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:drawableLeft="@drawable/ic_sort_descending"
+            android:gravity="center"
             android:text="@string/draft_sort_desc" />
     </LinearLayout>
 

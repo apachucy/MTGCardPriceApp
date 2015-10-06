@@ -6,13 +6,17 @@
 
     <TextView
         android:id="@+id/singleCard_cardNameTextView"
+        style="@style/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/text_view_padding"
+        android:paddingTop="@dimen/text_view_padding"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/singleCard_priceTextView"
+        style="@style/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -20,6 +24,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/singleCard_cardNameTextView"
+        android:paddingBottom="@dimen/text_view_padding"
+        android:paddingTop="@dimen/text_view_padding"
         android:text="@string/single_card_price" />
 
     <LinearLayout
@@ -29,10 +35,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/singleCard_priceTextView"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/text_view_padding"
+        android:paddingTop="@dimen/text_view_padding">
 
         <TextView
             android:id="@+id/singleCard_priceHighTextView"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -40,6 +49,7 @@
 
         <TextView
             android:id="@+id/singleCard_priceMediumTextView"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -47,6 +57,7 @@
 
         <TextView
             android:id="@+id/singleCard_priceLowTextView"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -57,10 +68,13 @@
         android:id="@+id/singleCard_foilHolder"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/singleCard_priceHolder">
+        android:layout_below="@+id/singleCard_priceHolder"
+        android:paddingBottom="@dimen/text_view_padding"
+        android:paddingTop="@dimen/text_view_padding">
 
         <TextView
             android:id="@+id/singleCard_priceFoilTextView"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -68,6 +82,7 @@
 
         <CheckBox
             android:id="@+id/singleCard_isFoilCheckBox"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -83,10 +98,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/singleCard_foilHolder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/text_view_padding"
+        android:paddingTop="@dimen/text_view_padding">
 
         <TextView
             android:id="@+id/singleCard_addDraftList"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -96,6 +114,7 @@
 
         <TextView
             android:id="@+id/singleCard_addCardList"
+            style="@style/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -108,7 +127,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/singleCard_predefinedListHolder"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/text_view_padding"
+        android:paddingTop="@dimen/text_view_padding">
 
         <Spinner
             android:id="@+id/singleCard_customListSpinner"
@@ -119,7 +140,7 @@
         <Button
             android:id="@+id/singleCard_addCardToListButton"
             android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="@string/single_card_add_button" />
     </LinearLayout>

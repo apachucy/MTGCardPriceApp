@@ -5,4 +5,6 @@
     <color name="accent">#66bb6a</color>
     <color name="windowBackground">#c8e6c9</color>
     <color name="navigationBarColor">#1b5e20</color>
+
+    <color name="black">#000000</color>
 </resources>
