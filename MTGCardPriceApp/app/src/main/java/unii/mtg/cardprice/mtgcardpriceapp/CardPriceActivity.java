@@ -71,22 +71,29 @@ public class CardPriceActivity extends BaseActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = null;
+        Bundle bundle = null;
         switch (position) {
             case FragmentConfig.ID_CARD_PRICE_FRAGMENT:
                 fragment = new CardPriceFragment();
-                Bundle bundle = new Bundle();
+                bundle = new Bundle();
                 bundle.putSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.CARD_BUNDLE, mSearchedCard);
                 fragment.setArguments(bundle);
                 break;
             case FragmentConfig.ID_CARD_PRICE_DRAFT_LIST_FRAGMENT:
+                bundle = new Bundle();
+                bundle.putString(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.LIST_NAME_BUNDLE, ((IMenu) (mNavigationDrawerFragment)).getMenuItem(position));
                 fragment = new CardDraftListFragment();
+                fragment.setArguments(bundle);
                 break;
 
             case FragmentConfig.ID_SETTINGS_FRAGMENT:
                 fragment = new SettingsFragment();
                 break;
             default:
+                bundle = new Bundle();
+                bundle.putString(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.LIST_NAME_BUNDLE, ((IMenu) (mNavigationDrawerFragment)).getMenuItem(position));
                 fragment = new CardPriceListFragment();
+                fragment.setArguments(bundle);
                 break;
         }
         fragmentManager.beginTransaction()
@@ -175,5 +182,10 @@ public class CardPriceActivity extends BaseActivity
     @Override
     public void addMenuItem(String itemName) {
         ((IMenu) (mNavigationDrawerFragment)).addMenuItem(itemName);
+    }
+
+    @Override
+    public String getMenuItem(int position) {
+        return ((IMenu) (mNavigationDrawerFragment)).getMenuItem(position);
     }
 }

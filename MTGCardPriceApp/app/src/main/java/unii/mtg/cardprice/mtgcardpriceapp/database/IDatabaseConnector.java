@@ -8,9 +8,16 @@ import java.util.List;
  */
 public interface IDatabaseConnector {
     ArrayList<Card> getGroupCardList(int listGroupId);
+
     List<CardGroup> getGroupListName();
+
     void removeCardFromList(int cardId, int listGroupId);
+
     void removeCardGroup(int listGroupId);
+
     void addList(CardGroup newCardGroup);
+
     void addCard(Card newCard, int listId);
+
+    int getGroupCardId(String groupName);
 }

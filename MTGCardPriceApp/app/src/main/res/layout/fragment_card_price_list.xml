@@ -4,9 +4,15 @@
     android:layout_height="match_parent"
     tools:context=".CardPriceActivity$PlaceholderFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/cardPriceFragment_cardListRecyclerView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scrollbars="vertical" />
+    <com.cjj.MaterialRefreshLayout
+        android:id="@+id/cardPriceFragment_pullToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cardPriceFragment_cardListRecyclerView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="vertical" />
+    </com.cjj.MaterialRefreshLayout>
 </RelativeLayout>

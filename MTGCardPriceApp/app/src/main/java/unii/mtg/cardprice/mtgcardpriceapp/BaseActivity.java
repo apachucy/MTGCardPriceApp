@@ -117,13 +117,27 @@ public class BaseActivity extends AppCompatActivity implements IDatabaseConnecto
                 cardRelationTable.setCardId(newCard.getCardId());
                 cardRelationTable.setCardListId(listId);
                 mDatabaseHelper.getCardRelationTableDao().create(cardRelationTable);
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
+    @Override
+    public int getGroupCardId(String groupName) {
+        if (mDatabaseHelper != null) {
+            try {
+                CardGroup cardGroup = mDatabaseHelper.getCardListDao().queryBuilder().where().like(CardGroup.LIST_NAME, groupName).queryForFirst();
+                return cardGroup.getCardListId();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return -1;
+    }
+
+    //TODO: dodać updata
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -134,5 +148,7 @@ public class BaseActivity extends AppCompatActivity implements IDatabaseConnecto
             OpenHelperManager.releaseHelper();
             mDatabaseHelper = null;
         }
+
+
     }
 }

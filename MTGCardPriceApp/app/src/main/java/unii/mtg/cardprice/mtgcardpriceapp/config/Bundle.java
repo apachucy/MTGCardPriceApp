@@ -8,4 +8,5 @@ public final class Bundle {
     }
 
     public static final String CARD_BUNDLE = Bundle.class.getName() + "CARD_BUNDLE";
+    public static final String LIST_NAME_BUNDLE = Bundle.class.getName() + "LIST_NAME_BUNDLE";
 }

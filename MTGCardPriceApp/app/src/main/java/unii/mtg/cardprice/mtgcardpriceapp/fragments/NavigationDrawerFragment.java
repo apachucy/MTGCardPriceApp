@@ -292,6 +292,11 @@ public class NavigationDrawerFragment extends BaseFragment implements IMenu {
         mMenuAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public String getMenuItem(int position) {
+        return mMenuItemList.get(position);
+    }
+
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */
