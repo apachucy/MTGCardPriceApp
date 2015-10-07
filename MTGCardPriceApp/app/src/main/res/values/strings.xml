@@ -24,6 +24,7 @@
     <string name="single_card_add_card_list">Add to card list</string>
     <string name="single_card_add_button">Add </string>
     <string name="single_card_name">Card name: %1$s</string>
+    <string name="single_card_toast_info">Card Added</string>
     <!-- End single card view -->
     <!--Settings -->
     <string name="settings_tutorial">Tutorial</string>
@@ -38,4 +39,7 @@
     <string name="draft_sort_asc">Price ascending</string>
     <string name="draft_sort_desc">Price descending</string>
     <!-- END Card Draft -->
+    <!-- Database Config -->
+    <string name="database_predefined_list">Card List</string>
+    <!--END Database Config -->
 </resources>

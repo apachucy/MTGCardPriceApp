@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,16 +60,19 @@ public class CardPriceFragment extends BaseFragment {
     @OnClick(R.id.singleCard_addCardToListButton)
     void onAddButtonClicked(View view) {
         mDatabaseConnector.addCard(mCardPrice, ((CardGroup) (mCustomListSpinner.getSelectedItem())).getCardListId());
+        Toast.makeText(mContext, getString(R.string.single_card_toast_info), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.singleCard_addDraftList)
     void onAddItemDraftList(View view) {
-        mCardPriceDraftList.getDraftCardList().add(mCardPrice);
+        mCardPriceDraftList.getDraftCardList().add(new Card(mCardPrice));
+        Toast.makeText(mContext, getString(R.string.single_card_toast_info), Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.singleCard_addCardList)
     void onAddItemCardList(View view) {
-        //TODO: stworzyć predefiniowaną listę i do niej dodać kartę
+        mDatabaseConnector.addCard(mCardPrice, mDatabaseConnector.getGroupCardId(getString(R.string.database_predefined_list)));
+        Toast.makeText(mContext, getString(R.string.single_card_toast_info), Toast.LENGTH_SHORT).show();
     }
 
     @Bind(R.id.singleCard_customListSpinner)
@@ -120,8 +124,7 @@ public class CardPriceFragment extends BaseFragment {
             mIsFoilCheckBox.setChecked(mCardPrice.isFoil());
             mCartNameTextView.setText(getString(R.string.single_card_name, mCardPrice.getCardName()));
         }
-
-        mCardGroupList = new ArrayList(mDatabaseConnector.getGroupListName());
+        mCardGroupList = new ArrayList<>(mDatabaseConnector.getGroupListNameWithoutCardList());
         mGroupListAdapter = new GroupListAdapter(mCardGroupList);
         mCustomListSpinner.setAdapter(mGroupListAdapter);
         return view;

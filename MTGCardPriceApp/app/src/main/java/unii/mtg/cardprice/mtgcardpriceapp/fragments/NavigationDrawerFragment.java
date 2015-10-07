@@ -109,7 +109,7 @@ public class NavigationDrawerFragment extends BaseFragment implements IMenu {
         });
 
         mMenuItemList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.dashboard_menu)));
-        for (CardGroup cardGroup : mDatabaseConnector.getGroupListName()) {
+        for (CardGroup cardGroup : mDatabaseConnector.getGroupList()) {
             mMenuItemList.add(cardGroup.getCardListName());
         }
         mMenuAdapter = new ArrayAdapter<String>(

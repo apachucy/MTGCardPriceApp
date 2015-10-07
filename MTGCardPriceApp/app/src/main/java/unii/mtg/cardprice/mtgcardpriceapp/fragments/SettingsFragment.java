@@ -96,7 +96,7 @@ public class SettingsFragment extends BaseFragment {
 
     private boolean checkGroupName(String newGroupName) {
         boolean nameNotUsed = true;
-        for (CardGroup cardGroup : mDatabaseConnector.getGroupListName()) {
+        for (CardGroup cardGroup : mDatabaseConnector.getGroupList()) {
             if (cardGroup.getCardListName().equals(newGroupName)) {
                 nameNotUsed = false;
                 break;

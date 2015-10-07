@@ -7,9 +7,9 @@ import java.util.List;
  * Created by apachucy on 2015-10-05.
  */
 public interface IDatabaseConnector {
-    ArrayList<Card> getGroupCardList(int listGroupId);
+    ArrayList<Card> getCardListForGroup(int listGroupId);
 
-    List<CardGroup> getGroupListName();
+    List<CardGroup> getGroupList();
 
     void removeCardFromList(int cardId, int listGroupId);
 
@@ -20,4 +20,8 @@ public interface IDatabaseConnector {
     void addCard(Card newCard, int listId);
 
     int getGroupCardId(String groupName);
+
+    void closeDatabase();
+
+    List<CardGroup> getGroupListNameWithoutCardList();
 }

@@ -3,7 +3,6 @@
     <string-array name="dashboard_menu">
         <item>Card Price</item>
         <item>Card Draft List</item>
-        <item>Card List</item>
         <item>Settings</item>
     </string-array>
 </resources>

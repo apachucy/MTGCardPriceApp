@@ -33,6 +33,17 @@ public class Card implements Serializable {
     public Card() {
     }
 
+    public Card(Card card) {
+        mCardId = card.getCardId();
+        mCardName = card.getCardName();
+        mCurrency = card.getCurrency();
+        mMediumPrice = card.getMediumPrice();
+        mHighPrice = card.getHighPrice();
+        mLowPrice = card.getLowPrice();
+        mFoilPrice = card.getFoilPrice();
+        isFoil = card.isFoil();
+    }
+
     public int getCardId() {
         return mCardId;
     }

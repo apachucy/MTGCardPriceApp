@@ -67,7 +67,7 @@ public class CardPriceListFragment extends BaseFragment {
         mCurrentOpenedListName = (String) bundle.getSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.LIST_NAME_BUNDLE);
         int groupId = mDatabaseConnector.getGroupCardId(mCurrentOpenedListName);
         if (groupId > -1) {
-            mCardList = mDatabaseConnector.getGroupCardList(groupId);
+            mCardList = mDatabaseConnector.getCardListForGroup(groupId);
         } else {
             mCardList = new ArrayList<>();
         }
