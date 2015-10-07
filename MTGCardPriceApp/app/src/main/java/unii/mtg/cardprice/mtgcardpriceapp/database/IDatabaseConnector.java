@@ -11,7 +11,7 @@ public interface IDatabaseConnector {
 
     List<CardGroup> getGroupList();
 
-    void removeCardFromList(int cardId, int listGroupId);
+    void removeCardFromCardGroup(int cardId, int listGroupId);
 
     void removeCardGroup(int listGroupId);
 
@@ -24,4 +24,6 @@ public interface IDatabaseConnector {
     void closeDatabase();
 
     List<CardGroup> getGroupListNameWithoutCardList();
+
+    void removeCardFromCardGroup(Card card, int listId);
 }

@@ -10,14 +10,15 @@ import java.util.List;
  */
 public class Card implements Serializable {
     public static final String CARD_ID = "card_id";
-
+    public static final String CARD_IS_FOIL = "card_is_foil";
+    public static final String CARD_NAME = "card_currency";
     @DatabaseField(generatedId = true, columnName = CARD_ID)
     private int mCardId;
     @DatabaseField(columnName = "card_name")
     private String mCardName;
     @DatabaseField(columnName = "card_currency")
     private String mCurrency;
-    @DatabaseField(columnName = "card_price_medium")
+    @DatabaseField(columnName = CARD_NAME)
     private float mMediumPrice;
     @DatabaseField(columnName = "card_price_high")
     private float mHighPrice;
@@ -25,7 +26,7 @@ public class Card implements Serializable {
     private float mLowPrice;
     @DatabaseField(columnName = "card_price_foil")
     private float mFoilPrice;
-    @DatabaseField(columnName = "card_is_foil")
+    @DatabaseField(columnName = CARD_IS_FOIL)
     private boolean isFoil;
 
     //  @DatabaseField(columnName = "card_list", canBeNull = false, foreign = true, foreignAutoRefresh = true)

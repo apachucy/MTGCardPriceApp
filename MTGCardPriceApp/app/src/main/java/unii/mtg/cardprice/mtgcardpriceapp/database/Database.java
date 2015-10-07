@@ -53,20 +53,6 @@ public class Database implements IDatabaseConnector {
         }
     }
 
-    public void removeCardFromList(int cardId, int listGroupId) {
-        if (mDatabaseHelper != null) {
-            try {
-                List<CardRelationTable> cardToBeRemovedList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(Card.CARD_ID, cardId).query();
-                for (CardRelationTable cardRelationTable : cardToBeRemovedList) {
-                    if (cardRelationTable.getCardListId() == listGroupId) {
-                        mDatabaseHelper.getCardRelationTableDao().delete(cardRelationTable);
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     public void removeCardGroup(int listGroupId) {
         if (mDatabaseHelper != null) {
@@ -75,6 +61,13 @@ public class Database implements IDatabaseConnector {
                 mDatabaseHelper.getCardListDao().delete(cardGroup);
                 List<CardRelationTable> cardRelationTableList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(CardRelationTable.LIST_ID, cardGroup.getCardListId()).query();
                 mDatabaseHelper.getCardRelationTableDao().delete(cardRelationTableList);
+                for (CardRelationTable cardRelationTable : cardRelationTableList)//int i = 0; i < cardRelationTableList.size(); i++) {
+                {
+                    List<CardRelationTable> cardExistOtherInList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(CardRelationTable.CARD_ID, cardRelationTable.getCardId()).query();
+                    if (cardExistOtherInList == null || cardExistOtherInList.isEmpty()) {
+                        removeCard(cardRelationTable.getCardId());
+                    }
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -96,11 +89,19 @@ public class Database implements IDatabaseConnector {
     public void addCard(Card newCard, int listId) {
         if (mDatabaseHelper != null) {
             try {
-                mDatabaseHelper.getCardDao().create(newCard);
-                CardRelationTable cardRelationTable = new CardRelationTable();
-                cardRelationTable.setCardId(newCard.getCardId());
-                cardRelationTable.setCardListId(listId);
-                mDatabaseHelper.getCardRelationTableDao().create(cardRelationTable);
+                //check db if card exist
+                Card card = mDatabaseHelper.getCardDao().queryBuilder().where().like(Card.CARD_NAME, newCard.getCardName()).and().eq(Card.CARD_IS_FOIL, newCard.isFoil()).queryForFirst();
+
+                if (card != null) {
+                    //if exist do an update
+                    mDatabaseHelper.getCardDao().update(card);
+                } else {
+                    mDatabaseHelper.getCardDao().create(newCard);
+                    CardRelationTable cardRelationTable = new CardRelationTable();
+                    cardRelationTable.setCardId(newCard.getCardId());
+                    cardRelationTable.setCardListId(listId);
+                    mDatabaseHelper.getCardRelationTableDao().create(cardRelationTable);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -139,5 +140,42 @@ public class Database implements IDatabaseConnector {
         return null;
     }
 
+    private void removeCard(int cardId) {
+        try {
+            mDatabaseHelper.getCardDao().deleteById(cardId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void removeCard(Card card) {
+        try {
+            mDatabaseHelper.getCardDao().delete(card);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeCardFromCardGroup(Card card, int listId) {
+        removeCardFromCardGroup(card.getCardId(), listId);
+    }
+
+    public void removeCardFromCardGroup(int cardId, int listGroupId) {
+        if (mDatabaseHelper != null) {
+            try {
+                CardRelationTable cardRelationTable = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(CardRelationTable.CARD_ID, cardId).and().eq(CardRelationTable.LIST_ID, listGroupId).queryForFirst();
+                if (cardRelationTable != null) {
+                    mDatabaseHelper.getCardRelationTableDao().delete(cardRelationTable);
+                    List<CardRelationTable> cardRelationTableList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(CardRelationTable.CARD_ID, cardId).query();
+                    if (cardRelationTableList == null || cardRelationTableList.isEmpty()) {
+                        removeCard(cardId);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

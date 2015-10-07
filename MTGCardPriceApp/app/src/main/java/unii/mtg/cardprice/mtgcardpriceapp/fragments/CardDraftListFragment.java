@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
 import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapter;
+import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapterMode;
 import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceSortDescendingComparator;
 import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceSortAscendingComparator;
 import unii.mtg.cardprice.mtgcardpriceapp.adapters.DividerItemDecorator;
@@ -76,7 +77,7 @@ public class CardDraftListFragment extends BaseFragment {
         mCardListRecyclerView.addItemDecoration(new DividerItemDecorator(mContext, DividerItemDecorator.VERTICAL_LIST));
 
         mDraftCardList = mCardPriceDraftList.getDraftCardList();
-        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mDraftCardList);
+        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mDraftCardList, CardPriceAdapterMode.DRAFT_LIST);
         mCardListRecyclerView.setAdapter(mCardListRecyclerAdapter);
         return view;
     }

@@ -53,8 +53,8 @@ public class BaseActivity extends AppCompatActivity implements IDatabaseConnecto
         return mDatabaseConnector.getGroupList();
     }
 
-    public void removeCardFromList(int cardId, int listGroupId) {
-        mDatabaseConnector.removeCardFromList(cardId, listGroupId);
+    public void removeCardFromCardGroup(int cardId, int listGroupId) {
+        mDatabaseConnector.removeCardFromCardGroup(cardId, listGroupId);
     }
 
     public void removeCardGroup(int listGroupId) {
@@ -87,6 +87,11 @@ public class BaseActivity extends AppCompatActivity implements IDatabaseConnecto
         //Remove predefined card list
         cardGroupList.remove(0);
         return cardGroupList;
+    }
+
+    @Override
+    public void removeCardFromCardGroup(Card card, int listId) {
+        mDatabaseConnector.removeCardFromCardGroup(card, listId);
     }
 
     @Override

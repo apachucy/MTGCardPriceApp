@@ -130,6 +130,8 @@ public class CardPriceFragment extends BaseFragment {
         return view;
     }
 
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();

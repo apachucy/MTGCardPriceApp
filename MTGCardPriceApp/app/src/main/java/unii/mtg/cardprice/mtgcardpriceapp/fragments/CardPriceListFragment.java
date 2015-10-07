@@ -19,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
 import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapter;
+import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapterMode;
 import unii.mtg.cardprice.mtgcardpriceapp.adapters.DividerItemDecorator;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
@@ -82,7 +83,7 @@ public class CardPriceListFragment extends BaseFragment {
         mCardListLayoutManager = new LinearLayoutManager(mContext);
         mCardListRecyclerView.setLayoutManager(mCardListLayoutManager);
         mCardListRecyclerView.addItemDecoration(new DividerItemDecorator(mContext, DividerItemDecorator.VERTICAL_LIST));
-        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mCardList);
+        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mCardList, CardPriceAdapterMode.CARD_LIST);
         mCardListRecyclerView.setAdapter(mCardListRecyclerAdapter);
 
         mMaterialRefreshLayout.setMaterialRefreshListener(mMaterialRefreshListener);
