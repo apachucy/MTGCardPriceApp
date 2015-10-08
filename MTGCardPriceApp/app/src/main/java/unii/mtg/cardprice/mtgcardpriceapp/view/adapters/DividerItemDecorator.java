@@ -1,4 +1,4 @@
-package unii.mtg.cardprice.mtgcardpriceapp.adapters;
+package unii.mtg.cardprice.mtgcardpriceapp.view.adapters;
 
 import android.content.Context;
 import android.content.res.TypedArray;

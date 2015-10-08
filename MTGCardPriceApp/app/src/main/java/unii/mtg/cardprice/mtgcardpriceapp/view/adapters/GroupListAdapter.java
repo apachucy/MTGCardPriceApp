@@ -1,6 +1,5 @@
-package unii.mtg.cardprice.mtgcardpriceapp.adapters;
+package unii.mtg.cardprice.mtgcardpriceapp.view.adapters;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +45,14 @@ public class GroupListAdapter extends BaseAdapter {
         ViewHolder viewHolder = new ViewHolder(view);
         viewHolder.nameTextView.setText(mCardGroupList.get(i).getCardListName());
         return view;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_list_name, parent, false);
+        ViewHolder viewHolder = new ViewHolder(convertView);
+        viewHolder.nameTextView.setText(mCardGroupList.get(position).getCardListName());
+        return super.getDropDownView(position, convertView, parent);
     }
 
     public static class ViewHolder {

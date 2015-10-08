@@ -11,4 +11,10 @@
     <dimen name="text_view_padding">5dp</dimen>
     <dimen name="text_view_padding_large">8dp</dimen>
     <!-- End TextView -->
+    <!-- Button -->
+    <dimen name="radius_small">2dp</dimen>
+    <dimen name="stroke_width_small">2dp</dimen>
+    <dimen name="button_padding">5dp</dimen>
+    <dimen name="button_margin">10dp</dimen>
+    <!-- End Button-->
 </resources>

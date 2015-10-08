@@ -5,7 +5,7 @@ import android.app.Application;
 import java.util.ArrayList;
 
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.ICardPriceDraftList;
 import unii.mtg.cardprice.mtgcardpriceapp.sharedpreferences.SettingsPreferencesFactory;
 import unii.mtg.cardprice.mtgcardpriceapp.sharedpreferences.SettingsSharedPreferences;
 import unii.mtg.cardprice.mtgcardpriceapp.sharedpreferences.SharedPreferencesManager;

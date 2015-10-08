@@ -1,4 +1,4 @@
-package unii.mtg.cardprice.mtgcardpriceapp.adapters;
+package unii.mtg.cardprice.mtgcardpriceapp.view.adapters;
 
 /**
  * Created by apachucy on 2015-10-07.

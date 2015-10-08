@@ -1,4 +1,4 @@
-package unii.mtg.cardprice.mtgcardpriceapp.fragments;
+package unii.mtg.cardprice.mtgcardpriceapp.view.fragments;
 
 import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;

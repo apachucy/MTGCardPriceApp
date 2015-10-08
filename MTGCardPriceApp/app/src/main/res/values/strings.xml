@@ -14,7 +14,7 @@
     <string name="search_hint">Card Name</string>
     <!-- END MENU -->
     <!-- Single Card View -->
-    <string name="single_card_price">Price:</string>
+    <string name="single_card_price">Prices</string>
     <string name="single_card_price_high">High : %1$s %2$s</string>
     <string name="single_card_price_medium">Medium : %1$s %2$s</string>
     <string name="single_card_price_low">Low : %1$s %2$s</string>

@@ -1,4 +1,4 @@
-package unii.mtg.cardprice.mtgcardpriceapp.fragments;
+package unii.mtg.cardprice.mtgcardpriceapp.view.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,11 +17,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapter;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapterMode;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceSortDescendingComparator;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceSortAscendingComparator;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.DividerItemDecorator;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.CardPriceAdapter;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.CardPriceAdapterMode;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.CardPriceSortDescendingComparator;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.CardPriceSortAscendingComparator;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.DividerItemDecorator;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 
 /**

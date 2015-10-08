@@ -1,4 +1,4 @@
-package unii.mtg.cardprice.mtgcardpriceapp.fragments;
+package unii.mtg.cardprice.mtgcardpriceapp.view.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapter;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.CardPriceAdapterMode;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.DividerItemDecorator;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.CardPriceAdapter;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.CardPriceAdapterMode;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.DividerItemDecorator;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
 
@@ -30,7 +30,7 @@ import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
 public class CardPriceListFragment extends BaseFragment {
 
     private Context mContext;
-    private ICardList mCardPriceSearch;
+
 
     @Bind(R.id.cardPriceFragment_cardListRecyclerView)
     RecyclerView mCardListRecyclerView;
@@ -48,18 +48,12 @@ public class CardPriceListFragment extends BaseFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        if (activity instanceof ICardList) {
-            mCardPriceSearch = (ICardList) activity;
-            mContext = activity;
-        } else {
-            throw new ClassCastException("Activity must implement ICardPriceDraftList");
-        }
         if (activity instanceof IDatabaseConnector) {
             mDatabaseConnector = (IDatabaseConnector) activity;
         } else {
             throw new ClassCastException("Activity must implement IDatabaseConnector");
         }
+        mContext = activity;
     }
 
     @Override

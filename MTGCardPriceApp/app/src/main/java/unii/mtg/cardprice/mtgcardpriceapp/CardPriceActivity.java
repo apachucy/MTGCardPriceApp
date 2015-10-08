@@ -17,20 +17,18 @@ import java.util.ArrayList;
 
 import unii.mtg.cardprice.mtgcardpriceapp.config.FragmentConfig;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceFragment;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardPriceListFragment;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.CardDraftListFragment;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardList;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.ICardPriceDraftList;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.IMenu;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.NavigationDrawerFragment;
-import unii.mtg.cardprice.mtgcardpriceapp.fragments.SettingsFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.CardPriceFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.CardPriceListFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.CardDraftListFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.ICardPriceDraftList;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.IMenu;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.NavigationDrawerFragment;
+import unii.mtg.cardprice.mtgcardpriceapp.view.fragments.SettingsFragment;
 
 public class CardPriceActivity extends BaseActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, ICardList, IMenu {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ICardPriceDraftList, IMenu {
 
 
-    private ArrayList<Card> mCardList = new ArrayList<>();
     private Card mSearchedCard = new Card();
 
 
@@ -171,11 +169,6 @@ public class CardPriceActivity extends BaseActivity
     @Override
     public ArrayList<Card> getDraftCardList() {
         return ((ICardPriceDraftList) (getApplication())).getDraftCardList();
-    }
-
-    @Override
-    public ArrayList<Card> getCardList() {
-        return mCardList;
     }
 
 

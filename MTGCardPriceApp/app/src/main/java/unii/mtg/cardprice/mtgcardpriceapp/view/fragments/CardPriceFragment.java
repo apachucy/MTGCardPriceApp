@@ -1,4 +1,4 @@
-package unii.mtg.cardprice.mtgcardpriceapp.fragments;
+package unii.mtg.cardprice.mtgcardpriceapp.view.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
-import unii.mtg.cardprice.mtgcardpriceapp.adapters.GroupListAdapter;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.GroupListAdapter;
 import unii.mtg.cardprice.mtgcardpriceapp.config.StringHelper;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.database.CardGroup;
@@ -31,7 +32,6 @@ public class CardPriceFragment extends BaseFragment {
     private Context mContext;
     private IDatabaseConnector mDatabaseConnector;
     private ICardPriceDraftList mCardPriceDraftList;
-    private ICardList mCardList; //TODO: czy to jest potrzebne?
     private Card mCardPrice;
 
     private GroupListAdapter mGroupListAdapter;
@@ -78,6 +78,9 @@ public class CardPriceFragment extends BaseFragment {
     @Bind(R.id.singleCard_customListSpinner)
     Spinner mCustomListSpinner;
 
+    @Bind(R.id.singleCard_customListHolder)
+    LinearLayout mCustomListHolder;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,19 +99,13 @@ public class CardPriceFragment extends BaseFragment {
         } else {
             throw new ClassCastException("Activity must implement ICardPriceDraftList");
         }
-        if (activity instanceof ICardList) {
-            mCardList = (ICardList) activity;
-        } else {
-            throw new ClassCastException("Activity must implement ICardList");
-        }
 
-        mContext = activity;
         if (activity instanceof IDatabaseConnector) {
             mDatabaseConnector = (IDatabaseConnector) activity;
         } else {
             throw new ClassCastException("Activity must implement IDatabaseConnector");
         }
-
+        mContext = activity;
     }
 
     @Nullable
@@ -125,11 +122,16 @@ public class CardPriceFragment extends BaseFragment {
             mCartNameTextView.setText(getString(R.string.single_card_name, mCardPrice.getCardName()));
         }
         mCardGroupList = new ArrayList<>(mDatabaseConnector.getGroupListNameWithoutCardList());
-        mGroupListAdapter = new GroupListAdapter(mCardGroupList);
-        mCustomListSpinner.setAdapter(mGroupListAdapter);
+        if (mCardGroupList.isEmpty()) {
+            mCustomListHolder.setVisibility(View.GONE);
+        } else {
+            mCustomListHolder.setVisibility(View.VISIBLE);
+            mGroupListAdapter = new GroupListAdapter(mCardGroupList);
+            mCustomListSpinner.setAdapter(mGroupListAdapter);
+        }
+
         return view;
     }
-
 
 
     @Override
