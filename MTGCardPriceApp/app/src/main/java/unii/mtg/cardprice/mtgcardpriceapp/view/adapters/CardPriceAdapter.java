@@ -11,6 +11,7 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -100,11 +101,12 @@ public class CardPriceAdapter extends RecyclerView.Adapter<CardPriceAdapter.View
         @OnClick(R.id.cardAdapter_deleteIconImageView)
         void onDeleteItemClicked(View view) {
             if (mCardPriceAdapterMode == CardPriceAdapterMode.CARD_LIST && mDeleteIconImageView.getVisibility() == View.VISIBLE) {
-                //TODO: add remove option
+
                 if (mDatabaseConnector != null && getPosition() != RecyclerView.NO_POSITION) {
                     mDatabaseConnector.removeCardFromCardGroup(mCardList.get(getPosition()), mListId);
                     mCardList.remove(getPosition());
                     notifyDataSetChanged();
+                    Toast.makeText(mContext, mContext.getString(R.string.adapter_card_removed), Toast.LENGTH_SHORT).show();
                 }
             }
         }

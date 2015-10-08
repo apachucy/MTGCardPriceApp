@@ -37,7 +37,6 @@ public class SettingsFragment extends BaseFragment {
     private ArrayList<CardGroup> mCardGroupList;
     private GroupListAdapter mGroupListAdapter;
 
-    //TODO: add remove custom list!
     @OnCheckedChanged(R.id.settings_tutorialSwitch)
     void onTutorialSelected(boolean checked) {
         SettingsPreferencesFactory.getInstance().setFirstRun(checked);
