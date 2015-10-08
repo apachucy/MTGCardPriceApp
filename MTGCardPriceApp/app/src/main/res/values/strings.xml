@@ -29,11 +29,16 @@
     <!--Settings -->
     <string name="settings_tutorial">Tutorial</string>
     <string name="settings_add_list">Add new list:</string>
+    <string name="settings_remove_list">Remove list:</string>
     <string name="settings_add">Add</string>
     <string name="settings_accept">Ok</string>
+    <string name="settings_remove">Remove</string>
     <string name="settings_page_price">Choose price from:</string>
     <string name="settings_list_name_empty">This name for list cannot be used</string>
-    <string name="settings_list_added">List was added</string>
+    <string name="settings_list_added_info">List was added</string>
+    <string name="settings_list_remove_info">List was removed</string>
+    <string name="settings_list_name_cannot_remove">List cannot be removed</string>
+
     <!-- End Settings-->
     <!-- Card Draft -->
     <string name="draft_sort_asc">Price ascending</string>
@@ -42,4 +47,7 @@
     <!-- Database Config -->
     <string name="database_predefined_list">Card List</string>
     <!--END Database Config -->
+    <!--Common -->
+    <string name="empty_list">Empty</string>
+    <!--End Common -->
 </resources>

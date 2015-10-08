@@ -53,13 +53,51 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/settings_portalPriceTextView"
+        android:id="@+id/settings_removeListTextView"
         style="@style/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/settings_addListHolder"
+        android:layout_marginBottom="@dimen/text_view_padding_large"
+        android:layout_marginTop="@dimen/text_view_padding_large"
+        android:text="@string/settings_remove_list"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:id="@+id/settings_removeListHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/settings_removeListTextView"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/settings_removeListSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.7" />
+
+        <Button
+            android:id="@+id/settings_removeListButton"
+            style="@style/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/settings_remove" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/settings_portalPriceTextView"
+        style="@style/textView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/settings_removeListHolder"
         android:layout_marginBottom="@dimen/text_view_padding_large"
         android:layout_marginTop="@dimen/text_view_padding_large"
         android:text="@string/settings_page_price"

@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface IMenu {
     void addMenuItem(String itemName);
     String getMenuItem(int position);
+    void removeMenuItem(String itemName);
 }

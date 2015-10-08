@@ -181,4 +181,9 @@ public class CardPriceActivity extends BaseActivity
     public String getMenuItem(int position) {
         return ((IMenu) (mNavigationDrawerFragment)).getMenuItem(position);
     }
+
+    @Override
+    public void removeMenuItem(String itemName) {
+         ((IMenu) (mNavigationDrawerFragment)).removeMenuItem(itemName);
+    }
 }

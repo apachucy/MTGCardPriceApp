@@ -8,17 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
+import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
 import unii.mtg.cardprice.mtgcardpriceapp.database.CardGroup;
 import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
 import unii.mtg.cardprice.mtgcardpriceapp.sharedpreferences.SettingsPreferencesFactory;
+import unii.mtg.cardprice.mtgcardpriceapp.view.adapters.GroupListAdapter;
 
 /**
  * Created by apachucy on 2015-10-01.
@@ -28,7 +34,10 @@ public class SettingsFragment extends BaseFragment {
     private IDatabaseConnector mDatabaseConnector;
     private Context mContext;
     private IMenu mMenuList;
+    private ArrayList<CardGroup> mCardGroupList;
+    private GroupListAdapter mGroupListAdapter;
 
+    //TODO: add remove custom list!
     @OnCheckedChanged(R.id.settings_tutorialSwitch)
     void onTutorialSelected(boolean checked) {
         SettingsPreferencesFactory.getInstance().setFirstRun(checked);
@@ -38,6 +47,8 @@ public class SettingsFragment extends BaseFragment {
     Switch mTutorialSwitch;
     @Bind(R.id.settings_addListEditText)
     EditText mAddListEditText;
+    @Bind(R.id.settings_removeListSpinner)
+    Spinner mRemoveSpinner;
 
     @OnClick(R.id.settings_addListButton)
     void onAddListButtonClicked(View view) {
@@ -46,11 +57,38 @@ public class SettingsFragment extends BaseFragment {
             CardGroup cardGroup = new CardGroup();
             cardGroup.setCardListName(groupName);
             mDatabaseConnector.addList(cardGroup);
-            Toast.makeText(mContext, getString(R.string.settings_list_added), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, getString(R.string.settings_list_added_info), Toast.LENGTH_SHORT).show();
             mAddListEditText.setText("");
             mMenuList.addMenuItem(groupName);
+            if (mCardGroupList.get(0).getCardListName().equals(getString(R.string.empty_list))) {
+                mCardGroupList.remove(0);
+                mCardGroupList.add(cardGroup);
+                mRemoveSpinner.setSelection(0);
+            } else {
+                mCardGroupList.add(cardGroup);
+            }
+            mGroupListAdapter.notifyDataSetChanged();
         } else {
             Toast.makeText(mContext, getString(R.string.settings_list_name_empty), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @OnClick(R.id.settings_removeListButton)
+    void onChooseRemoveList(View view) {
+        if (!mRemoveSpinner.getAdapter().isEmpty() && !mCardGroupList.get(0).getCardListName().equals(getString(R.string.empty_list))) {
+            CardGroup selectedCardGroup = (CardGroup) mRemoveSpinner.getSelectedItem();
+            mDatabaseConnector.removeCardGroup(selectedCardGroup.getCardListId());
+            mCardGroupList.remove(selectedCardGroup);
+            if (mCardGroupList.isEmpty()) {
+                mCardGroupList.add(predefinedCardGroup());
+            }
+            mMenuList.removeMenuItem(selectedCardGroup.getCardListName());
+            mGroupListAdapter.notifyDataSetChanged();
+            Toast.makeText(mContext, getString(R.string.settings_list_remove_info), Toast.LENGTH_SHORT).show();
+        } else {
+
+            Toast.makeText(mContext, getString(R.string.settings_list_name_cannot_remove), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -76,6 +114,14 @@ public class SettingsFragment extends BaseFragment {
         mContext = activity;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mCardGroupList = new ArrayList<>(mDatabaseConnector.getGroupListNameWithoutCardList());
+        if (mCardGroupList.isEmpty()) {
+            mCardGroupList.add(predefinedCardGroup());
+        }
+    }
 
     @Nullable
     @Override
@@ -85,7 +131,16 @@ public class SettingsFragment extends BaseFragment {
         //operations on Settings View
         mTutorialSwitch.setChecked(SettingsPreferencesFactory.getInstance().getFirstRun());
 
+        mGroupListAdapter = new GroupListAdapter(mCardGroupList);
+        mRemoveSpinner.setAdapter(mGroupListAdapter);
         return view;
+    }
+
+    private CardGroup predefinedCardGroup() {
+        CardGroup cardGroup = new CardGroup();
+        cardGroup.setCardListName(getString(R.string.empty_list));
+        return cardGroup;
+
     }
 
     @Override
