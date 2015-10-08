@@ -11,14 +11,14 @@ import java.util.List;
 public class Card implements Serializable {
     public static final String CARD_ID = "card_id";
     public static final String CARD_IS_FOIL = "card_is_foil";
-    public static final String CARD_NAME = "card_currency";
+    public static final String CARD_NAME = "card_name";
     @DatabaseField(generatedId = true, columnName = CARD_ID)
     private int mCardId;
-    @DatabaseField(columnName = "card_name")
+    @DatabaseField(columnName = CARD_NAME)
     private String mCardName;
     @DatabaseField(columnName = "card_currency")
     private String mCurrency;
-    @DatabaseField(columnName = CARD_NAME)
+    @DatabaseField(columnName = "card_price_medium")
     private float mMediumPrice;
     @DatabaseField(columnName = "card_price_high")
     private float mHighPrice;

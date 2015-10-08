@@ -43,6 +43,7 @@ public class CardPriceListFragment extends BaseFragment {
     private IDatabaseConnector mDatabaseConnector;
 
     private ArrayList<Card> mCardList;
+    private int mListId;
 
     @Override
     public void onAttach(Activity activity) {
@@ -66,9 +67,9 @@ public class CardPriceListFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         mCurrentOpenedListName = (String) bundle.getSerializable(unii.mtg.cardprice.mtgcardpriceapp.config.Bundle.LIST_NAME_BUNDLE);
-        int groupId = mDatabaseConnector.getGroupCardId(mCurrentOpenedListName);
-        if (groupId > -1) {
-            mCardList = mDatabaseConnector.getCardListForGroup(groupId);
+        mListId = mDatabaseConnector.getGroupCardId(mCurrentOpenedListName);
+        if (mListId > -1) {
+            mCardList = mDatabaseConnector.getCardListForGroup(mListId);
         } else {
             mCardList = new ArrayList<>();
         }
@@ -83,7 +84,7 @@ public class CardPriceListFragment extends BaseFragment {
         mCardListLayoutManager = new LinearLayoutManager(mContext);
         mCardListRecyclerView.setLayoutManager(mCardListLayoutManager);
         mCardListRecyclerView.addItemDecoration(new DividerItemDecorator(mContext, DividerItemDecorator.VERTICAL_LIST));
-        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mCardList, CardPriceAdapterMode.CARD_LIST);
+        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mCardList, CardPriceAdapterMode.CARD_LIST, mListId, mDatabaseConnector);
         mCardListRecyclerView.setAdapter(mCardListRecyclerAdapter);
 
         mMaterialRefreshLayout.setMaterialRefreshListener(mMaterialRefreshListener);

@@ -77,7 +77,7 @@ public class CardDraftListFragment extends BaseFragment {
         mCardListRecyclerView.addItemDecoration(new DividerItemDecorator(mContext, DividerItemDecorator.VERTICAL_LIST));
 
         mDraftCardList = mCardPriceDraftList.getDraftCardList();
-        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mDraftCardList, CardPriceAdapterMode.DRAFT_LIST);
+        mCardListRecyclerAdapter = new CardPriceAdapter(mContext, mDraftCardList, CardPriceAdapterMode.DRAFT_LIST, -1, null);
         mCardListRecyclerView.setAdapter(mCardListRecyclerAdapter);
         return view;
     }

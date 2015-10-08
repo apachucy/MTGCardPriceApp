@@ -37,11 +37,21 @@ public class BaseActivity extends AppCompatActivity implements IDatabaseConnecto
 
     private void init() {
         List<CardGroup> cardGroupList = mDatabaseConnector.getGroupList();
-        if (cardGroupList == null || cardGroupList.isEmpty() || !cardGroupList.get(0).getCardListName().equals(getString(R.string.database_predefined_list))) {
+        if (cardGroupList == null || cardGroupList.isEmpty() || listNotCreated(getString(R.string.database_predefined_list), cardGroupList)) {
             CardGroup cardGroup = new CardGroup();
             cardGroup.setCardListName(getString(R.string.database_predefined_list));
             mDatabaseConnector.addList(cardGroup);
         }
+    }
+
+    private boolean listNotCreated(String listName, List<CardGroup> cardGroupList) {
+        boolean isNotCreated = true;
+        for (CardGroup cardGroup : cardGroupList) {
+            if (cardGroup.getCardListName().equals(listName)) {
+                isNotCreated = false;
+            }
+        }
+        return isNotCreated;
     }
 
     public ArrayList<Card> getCardListForGroup(int listGroupId) {

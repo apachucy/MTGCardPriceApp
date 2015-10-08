@@ -61,7 +61,7 @@ public class Database implements IDatabaseConnector {
                 mDatabaseHelper.getCardListDao().delete(cardGroup);
                 List<CardRelationTable> cardRelationTableList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(CardRelationTable.LIST_ID, cardGroup.getCardListId()).query();
                 mDatabaseHelper.getCardRelationTableDao().delete(cardRelationTableList);
-                for (CardRelationTable cardRelationTable : cardRelationTableList)//int i = 0; i < cardRelationTableList.size(); i++) {
+                for (CardRelationTable cardRelationTable : cardRelationTableList)
                 {
                     List<CardRelationTable> cardExistOtherInList = mDatabaseHelper.getCardRelationTableDao().queryBuilder().where().eq(CardRelationTable.CARD_ID, cardRelationTable.getCardId()).query();
                     if (cardExistOtherInList == null || cardExistOtherInList.isEmpty()) {

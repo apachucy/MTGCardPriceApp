@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import unii.mtg.cardprice.mtgcardpriceapp.R;
 import unii.mtg.cardprice.mtgcardpriceapp.config.StringHelper;
 import unii.mtg.cardprice.mtgcardpriceapp.database.Card;
+import unii.mtg.cardprice.mtgcardpriceapp.database.IDatabaseConnector;
 
 /**
  * Card price adapter - displaying card in list
@@ -29,11 +30,22 @@ public class CardPriceAdapter extends RecyclerView.Adapter<CardPriceAdapter.View
     private ArrayList<Card> mCardList;
     private Context mContext;
     private CardPriceAdapterMode mCardPriceAdapterMode;
+    private IDatabaseConnector mDatabaseConnector;
+    private int mListId;
 
-    public CardPriceAdapter(Context context, ArrayList<Card> cardList, CardPriceAdapterMode cardPriceAdapterMode) {
+    /**
+     * @param context              - Activity context
+     * @param cardList             - cardList to display
+     * @param cardPriceAdapterMode - two modes: DRAFT (temporary list), Local (data saved in local db)
+     * @param listId               - in case of DRAFT -  -1, in other case pass listID from DB
+     * @param databaseConnector    - in case of DRAFT null in other case pass interface to make DB calls
+     */
+    public CardPriceAdapter(Context context, ArrayList<Card> cardList, CardPriceAdapterMode cardPriceAdapterMode, int listId, IDatabaseConnector databaseConnector) {
         mCardList = cardList;
         mContext = context;
         mCardPriceAdapterMode = cardPriceAdapterMode;
+        mListId = listId;
+        mDatabaseConnector = databaseConnector;
     }
 
 
@@ -89,6 +101,11 @@ public class CardPriceAdapter extends RecyclerView.Adapter<CardPriceAdapter.View
         void onDeleteItemClicked(View view) {
             if (mCardPriceAdapterMode == CardPriceAdapterMode.CARD_LIST && mDeleteIconImageView.getVisibility() == View.VISIBLE) {
                 //TODO: add remove option
+                if (mDatabaseConnector != null && getPosition() != RecyclerView.NO_POSITION) {
+                    mDatabaseConnector.removeCardFromCardGroup(mCardList.get(getPosition()), mListId);
+                    mCardList.remove(getPosition());
+                    notifyDataSetChanged();
+                }
             }
         }
 
